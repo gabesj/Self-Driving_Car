@@ -32,6 +32,7 @@ docker run -p 4567:4567 -v $PWD:/capstone -v /tmp/log:/root/.ros/ --rm -it capst
 
 ### Port Forwarding
 To set up port forwarding, please refer to the "uWebSocketIO Starter Guide" found in the classroom (see Extended Kalman Filter Project lesson).
+Go to the uWebSocketIO folder and install via one of the .sh files.
 
 ### Usage
 
@@ -40,7 +41,7 @@ To set up port forwarding, please refer to the "uWebSocketIO Starter Guide" foun
 git clone https://github.com/udacity/CarND-Capstone.git
 ```
 
-2. Install python dependencies
+2. Install python dependencies (this requirements.txt file has been changed from the original Udacity repo)
 ```bash
 cd CarND-Capstone
 pip install -r requirements.txt
@@ -52,7 +53,7 @@ catkin_make
 source devel/setup.sh
 roslaunch launch/styx.launch
 ```
-4. Run the simulator
+4. Run the simulator.  When it starts, select Camera mode rather than Manual mode.
 
 ### Real world testing
 1. Download [training bag](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) that was recorded on the Udacity self-driving car.

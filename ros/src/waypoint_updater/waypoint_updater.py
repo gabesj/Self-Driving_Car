@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 
 import rospy
+import math
+import numpy as np
 from geometry_msgs.msg import PoseStamped
 from styx_msgs.msg import Lane, Waypoint
+from std_msgs.msg import Int32 ###added this
+from scipy.spatial import KDTree ###added this
 
-import math
 
 '''
 This node will publish waypoints from the car's current position to some `x` distance ahead.
@@ -41,7 +44,7 @@ class WaypointUpdater(object):
 	self.pose = None
 	self.base_waypoints = None
 	self.waypoints_2d = None
-	self.waypoints_tree = None
+	self.waypoint_tree = None
 	self.base_lane = None #!#
 	self.stopline_wp_idx = -1 #!#
 	
@@ -49,23 +52,24 @@ class WaypointUpdater(object):
         #####rospy.spin()
 
     def loop(self):
-	rate = rospy.Rate(50)
-	while not rospy.is_shutdown():
-	    if self.pose and self.base_waypoints:
-	        #Get closest waypoint
-	        closest_waypoint_idx = self.get_closest_waypoint_idx()
-	        self.publish_waypoints(closest_waypoints_idx)
+        rate = rospy.Rate(50)
+        while not rospy.is_shutdown():
+            if self.pose and self.base_waypoints:
+                #Get closest waypoint
+                closest_waypoint_idx = self.get_closest_waypoint_idx()
+                self.publish_waypoints(closest_waypoint_idx)####closest_waypoints_idx
             rate.sleep()
-'''
+
+    '''
     def loop(self):
 	rate = rospy.Rate(50)
 	while not rospy.is_shutdown():
 	    if self.pose and self.base_lane:
 	        self.publish_waypoints()
 	    rate.sleep()
-'''
+    '''
 
-    def get_closest_waypoint_id(self):
+    def get_closest_waypoint_idx(self):
         x = self.pose.pose.position.x
 	y = self.pose.pose.position.y
 	closest_idx = self.waypoint_tree.query([x, y], 1)[1]
@@ -91,11 +95,11 @@ class WaypointUpdater(object):
 	lane.waypoints = self.base_waypoints.waypoints[closest_idx:closest_idx + LOOKAHEAD_WPS]
 	self.final_waypoints_pub.publish(lane)
 
-'''
+    '''
     def publish_waypoints(self):
 	final_lane = self.generate_lane()
 	self.final_waypoints_pub.publish(final_lane)
-'''
+    '''
 
     def generate_lane(self): #!#
 	lane = Lane()
@@ -140,15 +144,15 @@ class WaypointUpdater(object):
 	self.base_waypoints = waypoints
 	if not self.waypoints_2d:
 	    self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]#####
-	    self.waypoints_tree = KDTree(self.waypoints_2d)
+	    self.waypoint_tree = KDTree(self.waypoints_2d)
 
-'''
+    '''
     def waypoints_cb(self, waypoints):
 	self.base_lane = waypoints
 	if not self.waypoints_2d:
 	    self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]####
 	    self.waypoint_tree = KDTree(self.waypoints_2d)	
-'''
+    '''
 
 
     def traffic_cb(self, msg):
