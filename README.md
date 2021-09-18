@@ -11,7 +11,7 @@ The goal of this project was to implement a ROS (Robot Operating System) framewo
 
 ## Implementation:
 The picture below illustrates the relationships between the various ROS nodes:
-<img src="imgs/NodeMapEdited.png" width="800">
+<img src="imgs/NodeMapEdited.PNG" width="800">
 
 The structure of the project was provided by Udacity and I was responsible for writing code to make the car steer around the track while following a provided set of waypoint coordinates, as well as appropriately stop and start at traffic lights along the way.
  
