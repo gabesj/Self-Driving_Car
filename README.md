@@ -30,16 +30,16 @@ To complete this project, the files I edited are:
 - twist_controller.py
 - dbw_node.py
 
-The frozen graphs for the image classification are located in `ros/src/tl_detector/light_classification/SimModel` and `/RealImaggesModel`
+The frozen graphs for the image classification are located in `ros/src/tl_detector/light_classification/SimModel` and `ros/src/tl_detector/light_classification/RealImagesModel`
 
 This video shows the image classification results on the left:
 ![SimulatorAndTerminalView](imgs/CapstoneSimAndTerminalView.gif)
 
 
 ## Options:
-To choose between running the project by classifying images, or by using the traffic light location/color provided by the simultor, edit the `CLASSIFY_IMAGES` variable in tl\\_detector.py to either True or False.  Classifying the images will put quite a load on your computer, so the image classifier actually only classifies 1 out of 4 images to reduce lagging.  Another necessity for preventing the vehicle from out-running the simulator is to slow down the speed.  In twist\\_controller.py you will need to edit this speed by choosing a value for the `mx` value.  I have provided some options that worked for me - just uncomment the one you want to use or choose your own value based on your computer's capabilities.
+To choose between running the project by classifying images, or by using the traffic light location/color provided by the simultor, edit the `CLASSIFY_IMAGES` variable in tl\_detector.py to either True or False.  Classifying the images will put quite a load on your computer, so the image classifier actually only classifies 1 out of 4 images to reduce lagging.  Another necessity for preventing the vehicle from out-running the simulator is to slow down the speed.  In twist\_controller.py you will need to edit this speed by choosing a value for the `mx` value.  I have provided some options that worked for me - just uncomment the one you want to use or choose your own value based on your computer's capabilities.
 
-To run the project without the simulator and instead use a rosbag of pre-recorded real-life images, change the `RUNNING_SIMULATOR` variable to False in the tl\\_classifier.py file and follow the instructions below in the Real Worls Testing section.
+To run the project without the simulator and instead use a rosbag of pre-recorded real-life images, change the `RUNNING_SIMULATOR` variable to False in the tl\_classifier.py file and follow the instructions below in the Real World Testing section.
 
 
 ## Setup:
